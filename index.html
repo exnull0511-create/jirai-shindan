@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>恋愛地雷度診断｜あなたが恋人に踏ませている地雷がわかる</title>
+<meta name="description" content="20問で、あなたが恋愛で埋めている地雷を16キャラで診断。友達や恋人との相性もわかります。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exnull0511-create.github.io/jirai-shindan/">
+<meta property="og:title" content="恋愛地雷度診断">
+<meta property="og:description" content="20問で、あなたが恋人に踏ませている地雷を16キャラで診断。友達や恋人との相性もわかります。">
+<meta property="og:image" content="https://exnull0511-create.github.io/jirai-shindan/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="恋愛地雷度診断">
+<meta name="twitter:description" content="20問で、あなたが恋人に踏ませている地雷を16キャラで診断。">
+<meta name="twitter:image" content="https://exnull0511-create.github.io/jirai-shindan/ogp.png">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="theme-color" content="#FBE1EC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --milk:#FFF6FA; --sakura:#FBE1EC; --ink:#2B1630; --pink:#FF3D8B; --lilac:#B9A2FF; --mint:#7DE0C4; --lemon:#FFE15C;
+  --soft:#8A6E86;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--sakura);color:var(--ink);font-family:"Zen Maru Gothic",system-ui,sans-serif;font-weight:700;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(255,61,139,.13) 2.2px, transparent 2.6px) 0 0/24px 24px,
+    var(--sakura);}
+.wrap{max-width:460px;margin:0 auto;padding:18px 18px 70px}
+.hidden{display:none!important}
+.pop{font-family:"Mochiy Pop One",sans-serif;font-weight:400}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lilac);outline-offset:3px}
+
+/* ステッカー見出し */
+.sticker-title{font-family:"Mochiy Pop One";font-size:44px;line-height:1.12;color:var(--pink);
+  -webkit-text-stroke:9px var(--ink);paint-order:stroke fill;text-shadow:0 6px 0 var(--ink);letter-spacing:.01em}
+.sticker-title .w{display:block;color:var(--milk)}
+
+.btn{display:block;width:100%;border:3px solid var(--ink);border-radius:999px;padding:16px;font:900 18px "Zen Maru Gothic",sans-serif;
+  background:var(--pink);color:#fff;cursor:pointer;box-shadow:0 6px 0 var(--ink);transition:transform .08s, box-shadow .08s;text-align:center;text-decoration:none}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
+.btn.sub{background:var(--milk);color:var(--ink)}
+.btn.sm{padding:12px;font-size:15px;box-shadow:0 4px 0 var(--ink)}
+
+/* ===== TOP ===== */
+#top{text-align:center}
+.hero{position:relative;height:250px;margin:6px 0 0}
+.hero .c{position:absolute;filter:drop-shadow(0 5px 0 rgba(43,22,48,.9))}
+.hero .c1{width:170px;left:50%;top:10px;transform:translateX(-50%) rotate(-4deg);z-index:2}
+.hero .c2{width:120px;left:2%;top:96px;transform:rotate(-14deg)}
+.hero .c3{width:120px;right:2%;top:90px;transform:rotate(12deg)}
+.hero .c svg{width:100%;height:auto;display:block}
+@media (prefers-reduced-motion:no-preference){
+  .hero .c1{animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateX(-50%) rotate(-4deg) translateY(0)}50%{transform:translateX(-50%) rotate(3deg) translateY(-8px)}}
+}
+.lead{font-size:16px;line-height:1.9;margin:22px 0 22px;font-weight:900}
+.facts{font-size:13px;color:var(--soft);margin-top:14px}
+.invite{display:flex;gap:12px;align-items:center;text-align:left;background:var(--milk);border:3px solid var(--ink);border-radius:20px;padding:12px 14px;margin-bottom:18px;box-shadow:0 5px 0 var(--pink)}
+.invite .ic{width:64px;flex:none}
+.invite p{font-size:14px;line-height:1.7}
+
+/* 図鑑 */
+.zukan{margin-top:40px;background:var(--milk);border:3px solid var(--ink);border-radius:26px;padding:18px 14px 16px;text-align:left}
+.zukan h2{font-family:"Mochiy Pop One";font-weight:400;font-size:19px;display:flex;justify-content:space-between;align-items:baseline;padding:0 4px}
+.zukan h2 small{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:14px;color:var(--pink)}
+.zukan .note{font-size:12px;color:var(--soft);margin:6px 4px 12px;line-height:1.6}
+.zgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.zcell{aspect-ratio:1;border-radius:16px;background:var(--sakura);border:2px solid transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:4px;position:relative}
+.zcell svg{width:100%;height:100%}
+.zcell.on{background:#fff;border-color:var(--ink)}
+.zcell.me::after{content:"YOU";position:absolute;top:-7px;right:-4px;background:var(--pink);color:#fff;font-size:9px;font-weight:900;padding:2px 6px;border-radius:999px;border:2px solid var(--ink)}
+
+/* ===== QUIZ ===== */
+#quiz{padding-top:4px}
+.qtop{display:flex;align-items:center;gap:12px;height:40px}
+.qback{width:40px;height:40px;border-radius:50%;border:3px solid var(--ink);background:var(--milk);font-size:18px;cursor:pointer;flex:none}
+.segs{flex:1;display:grid;grid-template-columns:repeat(20,1fr);gap:3px}
+.segs i{height:10px;border-radius:3px;background:rgba(43,22,48,.14)}
+.segs i.done{background:var(--pink)}
+.segs i.now{background:var(--ink)}
+.guide{display:flex;flex-direction:column;align-items:center;margin-top:26px}
+.bubble{position:relative;background:#fff;border:3px solid var(--ink);border-radius:26px;padding:24px 20px;min-height:132px;width:100%;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:0 6px 0 var(--ink)}
+.bubble::after{content:"";position:absolute;bottom:-17px;left:50%;width:26px;height:26px;background:#fff;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:translateX(-50%) rotate(45deg)}
+.qno{position:absolute;top:-14px;left:18px;background:var(--lemon);border:3px solid var(--ink);border-radius:999px;padding:1px 12px;font-size:13px;font-weight:900}
+.qtext{font-size:20px;font-weight:900;line-height:1.65}
+.gchar{width:96px;margin-top:20px}
+.gchar svg{width:100%;display:block}
+@media (prefers-reduced-motion:no-preference){ .gchar.hop{animation:hop .35s ease} @keyframes hop{40%{transform:translateY(-12px) rotate(-6deg)}} }
+.choices{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.ch{display:flex;align-items:center;gap:12px;width:100%;border:3px solid var(--ink);border-radius:18px;background:var(--milk);padding:12px 16px;font-size:16px;font-weight:900;cursor:pointer;text-align:left;transition:transform .08s}
+.ch .mk{width:22px;height:22px;border-radius:50%;border:3px solid var(--ink);flex:none;background:#fff}
+.ch[data-v="5"] .mk{background:var(--pink)} .ch[data-v="4"] .mk{background:#FF9EC4}
+.ch[data-v="3"] .mk{background:#fff} .ch[data-v="2"] .mk{background:#CFC3FF} .ch[data-v="1"] .mk{background:var(--lilac)}
+.ch:active{transform:scale(.98)}
+.ch.sel{background:var(--ink);color:#fff}
+
+/* ===== LOADING ===== */
+#loading{text-align:center;padding-top:90px;position:relative}
+.bombbig{width:200px;margin:0 auto}
+.bombbig svg{width:100%;display:block}
+#loading p{margin-top:24px;font-size:16px;font-weight:900}
+.flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:50}
+@media (prefers-reduced-motion:no-preference){
+  .bombbig.shake{animation:shake .12s linear infinite}
+  @keyframes shake{25%{transform:translate(-3px,1px) rotate(-2deg)}75%{transform:translate(3px,-1px) rotate(2deg)}}
+  .flash.go{animation:flash .7s ease-out}
+  @keyframes flash{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
+}
+.fuse-burn{stroke-dasharray:60;stroke-dashoffset:0}
+@media (prefers-reduced-motion:no-preference){ .fuse-burn{animation:burn 2.2s linear forwards} @keyframes burn{to{stroke-dashoffset:60}} }
+
+/* ===== RESULT ===== */
+.rintro{text-align:center;font-size:14px;color:var(--soft);font-weight:900;margin:6px 0 14px}
+.card{position:relative;background:var(--ink);border-radius:26px;padding:10px;box-shadow:0 10px 0 rgba(43,22,48,.25)}
+@media (prefers-reduced-motion:no-preference){ .card.reveal{animation:flip .8s cubic-bezier(.2,.9,.25,1.2)} @keyframes flip{0%{transform:perspective(900px) rotateY(90deg) scale(.8)}100%{transform:none}} }
+.card-in{background:linear-gradient(170deg,var(--cbg1,#FFD1E3),var(--cbg2,#FFF6FA) 62%);border-radius:18px;padding:14px 16px 18px;position:relative;overflow:hidden}
+.card-top{display:flex;justify-content:space-between;align-items:center}
+.ccode{font-family:"Mochiy Pop One";font-size:15px;letter-spacing:.18em;background:var(--ink);color:#fff;padding:3px 8px 3px 11px;border-radius:8px}
+.cno{font-size:12px;font-weight:900;color:var(--soft)}
+.cwin{position:relative;margin:10px 0 6px;height:230px;border-radius:16px;background:
+   radial-gradient(circle at 50% 55%, rgba(255,255,255,.95) 0 34%, transparent 35%),
+   repeating-conic-gradient(from 0deg at 50% 55%, rgba(255,255,255,.35) 0 10deg, transparent 10deg 20deg);
+   display:flex;align-items:center;justify-content:center;border:3px solid var(--ink);overflow:hidden}
+.cwin svg{height:210px;width:auto;position:relative;z-index:1}
+.holo{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:color-dodge;opacity:.35;
+  background:linear-gradient(115deg,transparent 20%,#ff9ad5 35%,#9af0ff 45%,#fff59a 55%,transparent 70%) var(--hx,50%) 0/250% 100% no-repeat}
+.cname-sm{font-size:13px;color:var(--soft);font-weight:900;text-align:center;margin-top:8px}
+.cname{font-family:"Mochiy Pop One";font-size:27px;line-height:1.3;text-align:center;margin-top:2px}
+.ccatch{font-size:14px;line-height:1.8;margin-top:10px;text-align:center}
+.cmeter{margin-top:14px;background:#fff;border:3px solid var(--ink);border-radius:16px;padding:10px 14px;display:flex;align-items:center;gap:12px}
+.cmeter .lbl{font-size:12px;font-weight:900;line-height:1.3;flex:none}
+.cmeter .bar{flex:1;height:16px;border-radius:999px;background:var(--sakura);border:2px solid var(--ink);overflow:hidden}
+.cmeter .bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(-45deg,var(--pink) 0 8px,#FF79AE 8px 16px);transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.cmeter .num{font-family:"Mochiy Pop One";font-size:30px;flex:none;min-width:84px;text-align:right}
+.cmeter .num small{font-size:15px}
+.crank{text-align:center;font-size:13px;font-weight:900;margin-top:10px}
+
+.sharebar{margin:22px 0 8px}
+.sharebar .row{display:flex;gap:10px;margin-top:10px}
+.sharebar .row .btn{flex:1}
+.btn.x{background:#000;color:#fff}
+.btn.line{background:#06C755;color:#fff}
+.savebox{margin-top:12px;background:var(--milk);border:3px dashed var(--ink);border-radius:20px;padding:12px;text-align:center}
+.savebox img{width:58%;border-radius:12px;border:3px solid var(--ink);display:block;margin:0 auto 8px}
+.savebox p{font-size:13px;color:var(--soft)}
+
+.blk{margin-top:34px}
+.blk h3{font-family:"Mochiy Pop One";font-weight:400;font-size:19px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.blk h3 .ico{width:34px;height:34px;flex:none}
+
+/* 地雷リスト：埋設チケット風 */
+.mines{list-style:none;display:flex;flex-direction:column;gap:10px}
+.mines li{display:flex;gap:12px;align-items:flex-start;background:#fff;border:3px solid var(--ink);border-radius:16px;padding:12px 14px;font-size:15px;line-height:1.7}
+.mines li b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--pink);color:#fff;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px}
+
+/* 本音：トーク画面風 */
+.talk{background:#B8C8E6;border-radius:20px;padding:16px 14px;border:3px solid var(--ink)}
+.talk .who{font-size:12px;color:#3c4a66;margin-bottom:6px;font-weight:900}
+.talk .msg{display:flex;gap:8px;align-items:flex-start}
+.talk .av{width:38px;height:38px;border-radius:50%;background:#fff;border:2px solid var(--ink);flex:none;display:flex;align-items:center;justify-content:center;font-size:18px}
+.talk .tx{background:#fff;border-radius:4px 18px 18px 18px;padding:10px 14px;font-size:15px;line-height:1.7;max-width:84%}
+.talk .rd{font-size:10px;color:#3c4a66;align-self:flex-end;font-weight:900}
+
+.fix{background:var(--mint);border:3px solid var(--ink);border-radius:20px;padding:16px;font-size:15px;line-height:1.85}
+
+/* パラメータ */
+.axes{background:#fff;border:3px solid var(--ink);border-radius:20px;padding:16px}
+.axis+.axis{margin-top:18px}
+.axis .lr{display:flex;justify-content:space-between;font-size:13px;font-weight:900}
+.axis .lr span.on{color:var(--pink)}
+.axis .lr span.off{color:#BFAFBC}
+.axis .tr{position:relative;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--lilac),#eee 50%,var(--pink));margin:8px 0 6px;border:2px solid var(--ink)}
+.axis .tr i{position:absolute;top:50%;width:24px;height:24px;border-radius:50%;background:var(--lemon);border:3px solid var(--ink);transform:translate(-50%,-50%);left:50%;transition:left 1.1s cubic-bezier(.2,.8,.2,1)}
+.axis p{font-size:12px;color:var(--soft);line-height:1.6}
+.axis p b{color:var(--ink)}
+
+/* 相性 */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pair .p{border:3px solid var(--ink);border-radius:20px;padding:12px 8px 14px;text-align:center}
+.pair .p.good{background:#FFE3EE}
+.pair .p.bad{background:#E9E3FF}
+.pair .p small{font-size:12px;font-weight:900;display:block}
+.pair .p .pc{width:84px;margin:6px auto 4px}
+.pair .p .pc svg{width:100%;display:block}
+.pair .p b{font-size:13px;line-height:1.5;display:block}
+.compat{background:#fff;border:3px solid var(--ink);border-radius:22px;padding:16px;box-shadow:0 6px 0 var(--pink);margin-top:22px}
+.compat .duo{display:flex;align-items:center;justify-content:center;gap:4px}
+.compat .duo div{width:84px}
+.compat .duo svg{width:100%;display:block}
+.compat .heart{font-family:"Mochiy Pop One";font-size:40px;color:var(--pink);-webkit-text-stroke:5px var(--ink);paint-order:stroke fill;min-width:90px;text-align:center}
+.compat h4{text-align:center;font-size:14px;margin:4px 0 8px}
+.compat p{font-size:14px;line-height:1.8;margin-top:6px}
+
+details.theory{background:var(--milk);border:3px solid var(--ink);border-radius:20px;padding:14px 16px}
+details.theory summary{cursor:pointer;font-weight:900;list-style:none;display:flex;justify-content:space-between}
+details.theory summary::-webkit-details-marker{display:none}
+details.theory summary::after{content:"＋";color:var(--pink)}
+details.theory[open] summary::after{content:"－"}
+details.theory .body{font-size:13px;line-height:1.9;color:#5a4458;margin-top:12px;font-weight:500}
+details.theory .body b{color:var(--ink);font-weight:900}
+
+/* ボトムシート */
+.sheet-bg{position:fixed;inset:0;background:rgba(43,22,48,.5);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--milk);width:100%;max-width:460px;border:3px solid var(--ink);border-bottom:0;border-radius:28px 28px 0 0;padding:20px 20px 34px;text-align:center}
+@media (prefers-reduced-motion:no-preference){ .sheet{animation:up .25s ease-out} @keyframes up{from{transform:translateY(100%)}} }
+.sheet .sc{width:150px;margin:0 auto}
+.sheet .sc svg{width:100%;display:block}
+.sheet h4{font-family:"Mochiy Pop One";font-weight:400;font-size:21px;margin-top:6px}
+.sheet small{display:block;color:var(--soft);font-weight:900;margin-top:2px}
+.sheet p{font-size:14px;line-height:1.8;margin:12px 0 18px}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--ink);color:#fff;font-weight:900;padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:60}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===== TOP ===== -->
+<section id="top">
+  <div class="hero" id="hero"></div>
+  <h1 class="sticker-title">恋愛地雷度<span class="w">診断</span></h1>
+  <p class="lead">あなたが恋人に踏ませている地雷を、<br>20問で掘り当てます。</p>
+  <div id="invite" class="invite hidden"></div>
+  <button class="btn" id="startBtn">診断をはじめる</button>
+  <p class="facts">20問、約1分半で終わります。今の恋人か、前の恋人を思い浮かべて答えてください。</p>
+
+  <div class="zukan">
+    <h2>地雷キャラ図鑑 <small id="zCount">0/16</small></h2>
+    <p class="note">診断で出たキャラが図鑑に登録されます。友達の結果を見ても増えます。</p>
+    <div class="zgrid" id="zgrid"></div>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section id="quiz" class="hidden">
+  <div class="qtop">
+    <button class="qback" id="backBtn" aria-label="前の質問に戻る">‹</button>
+    <div class="segs" id="segs"></div>
+  </div>
+  <div class="guide">
+    <div class="bubble"><span class="qno" id="qno">Q1</span><p class="qtext" id="qtext"></p></div>
+    <div class="gchar" id="gchar"></div>
+  </div>
+  <div class="choices" id="choices">
+    <button class="ch" data-v="5"><span class="mk"></span>すごくあてはまる</button>
+    <button class="ch" data-v="4"><span class="mk"></span>ややあてはまる</button>
+    <button class="ch" data-v="3"><span class="mk"></span>どちらとも言えない</button>
+    <button class="ch" data-v="2"><span class="mk"></span>あまりあてはまらない</button>
+    <button class="ch" data-v="1"><span class="mk"></span>まったくあてはまらない</button>
+  </div>
+</section>
+
+<!-- ===== LOADING ===== -->
+<section id="loading" class="hidden">
+  <div class="bombbig" id="bombbig"></div>
+  <p id="loadText">地雷を探知しています</p>
+</section>
+<div class="flash" id="flash"></div>
+
+<!-- ===== RESULT ===== -->
+<section id="result" class="hidden">
+  <p class="rintro">あなたの恋愛地雷キャラは</p>
+  <div class="card" id="card">
+    <div class="card-in" id="cardIn">
+      <div class="card-top"><span class="ccode" id="rCode"></span><span class="cno" id="rNo"></span></div>
+      <div class="cwin" id="cwin"><div id="rChar"></div><div class="holo" id="holo"></div></div>
+      <div class="cname-sm" id="rType"></div>
+      <div class="cname" id="rName"></div>
+      <p class="ccatch" id="rCatch"></p>
+      <div class="cmeter">
+        <span class="lbl">恋愛<br>地雷度</span>
+        <div class="bar"><i id="rBar"></i></div>
+        <span class="num" id="rScore">0<small>%</small></span>
+      </div>
+      <p class="crank" id="rRank"></p>
+    </div>
+  </div>
+
+  <div id="compatBox" class="compat hidden"></div>
+
+  <div class="sharebar">
+    <div class="row">
+      <a class="btn sm x" id="xBtn" target="_blank" rel="noopener">Xでシェア</a>
+      <a class="btn sm line" id="lineBtn" target="_blank" rel="noopener">LINEで送る</a>
+    </div>
+    <div class="row"><button class="btn sm sub" id="copyBtn">相性診断のリンクをコピー</button></div>
+    <div class="savebox">
+      <img id="cardImg" alt="ストーリー用の結果画像">
+      <p>画像を長押しで保存して、ストーリーに貼れます</p>
+      <button class="btn sm sub hidden" id="dlBtn" style="margin-top:10px">画像を保存</button>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3><span class="ico" id="icoMine"></span>あなたが埋めている地雷</h3>
+    <ul class="mines" id="rMines"></ul>
+  </div>
+
+  <div class="blk">
+    <h3>恋人が言えずにいる本音</h3>
+    <div class="talk">
+      <div class="who">恋人</div>
+      <div class="msg"><div class="av">🫠</div><div class="tx" id="rHonne"></div><span class="rd">未送信</span></div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>地雷の撤去方法</h3>
+    <div class="fix" id="rFix"></div>
+  </div>
+
+  <div class="blk">
+    <h3>あなたの恋愛パラメータ</h3>
+    <div class="axes" id="rAxes"></div>
+  </div>
+
+  <div class="blk">
+    <h3>相性のいいキャラ、悪いキャラ</h3>
+    <div class="pair">
+      <div class="p good"><small>いちばん相性がいい</small><div class="pc" id="bestC"></div><b id="bestN"></b></div>
+      <div class="p bad"><small>いちばん爆発しやすい</small><div class="pc" id="worstC"></div><b id="worstN"></b></div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <details class="theory"><summary>この診断の仕組みと根拠</summary><div class="body" id="theory"></div></details>
+  </div>
+
+  <div class="blk" style="display:flex;flex-direction:column;gap:12px">
+    <button class="btn sub" id="zBtn">図鑑を見る</button>
+    <button class="btn" id="retryBtn">もう一度診断する</button>
+  </div>
+</section>
+</div>
+<div id="sheetRoot"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SHARE_URL = "https://exnull0511-create.github.io/jirai-shindan/";
+const INK="#2B1630";
+
+/* ================= キャラクター描画 ================= */
+// すべてのキャラは「爆弾ボディ＋導火線」を共通の骨格にしたオリジナルデザイン
+const EYE = {
+  dot:()=>`<circle cx="80" cy="118" r="7.5" fill="${INK}"/><circle cx="120" cy="118" r="7.5" fill="${INK}"/><circle cx="82.5" cy="115.5" r="2.6" fill="#fff"/><circle cx="122.5" cy="115.5" r="2.6" fill="#fff"/>`,
+  wide:()=>`<circle cx="79" cy="116" r="13" fill="#fff" stroke="${INK}" stroke-width="4"/><circle cx="121" cy="116" r="13" fill="#fff" stroke="${INK}" stroke-width="4"/><circle cx="79" cy="117" r="6.5" fill="${INK}"/><circle cx="121" cy="117" r="6.5" fill="${INK}"/><circle cx="81" cy="114.5" r="2" fill="#fff"/><circle cx="123" cy="114.5" r="2" fill="#fff"/>`,
+  teary:()=>`<circle cx="80" cy="117" r="10" fill="${INK}"/><circle cx="120" cy="117" r="10" fill="${INK}"/><circle cx="83" cy="113" r="3.6" fill="#fff"/><circle cx="123" cy="113" r="3.6" fill="#fff"/><circle cx="77" cy="121" r="1.8" fill="#fff"/><circle cx="117" cy="121" r="1.8" fill="#fff"/><path d="M71 127 q-4 8 0 12 q4 -4 0 -12z" fill="#8FD3FF" stroke="${INK}" stroke-width="2"/>`,
+  angry:()=>EYE.dot()+`<path d="M67 101 L91 110 M133 101 L109 110" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`,
+  sleepy:()=>`<path d="M70 119 Q80 125 90 119 M110 119 Q120 125 130 119" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+  happy:()=>`<path d="M70 122 Q80 109 90 122 M110 122 Q120 109 130 122" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+  tight:()=>`<path d="M71 110 L87 117 L71 124 M129 110 L113 117 L129 124" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
+  side:()=>`<circle cx="74" cy="119" r="7" fill="${INK}"/><circle cx="114" cy="119" r="7" fill="${INK}"/><path d="M68 110 L90 110 M108 110 L130 110" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`,
+  smug:()=>`<path d="M69 115 a11 11 0 0 0 22 0 z M109 115 a11 11 0 0 0 22 0 z" fill="${INK}"/><path d="M67 115 L93 115 M107 115 L133 115" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`,
+  heart:()=>{const h=(x)=>`<path d="M${x} 126 l-10 -10 a6 6 0 0 1 10 -7 a6 6 0 0 1 10 7 z" fill="#FF3D8B" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`;return h(80)+h(120);},
+  glasses:()=>`<rect x="64" y="104" width="30" height="24" rx="8" fill="#fff" fill-opacity=".6" stroke="${INK}" stroke-width="4.5"/><rect x="106" y="104" width="30" height="24" rx="8" fill="#fff" fill-opacity=".6" stroke="${INK}" stroke-width="4.5"/><path d="M94 114 L106 114" stroke="${INK}" stroke-width="4.5"/><circle cx="79" cy="116" r="4.5" fill="${INK}"/><circle cx="121" cy="116" r="4.5" fill="${INK}"/><path d="M68 108 L76 108" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`,
+  fire:()=>`<path d="M80 108 l3 7 7 1 -5 5 1 7 -6 -4 -6 4 1 -7 -5 -5 7 -1z M120 108 l3 7 7 1 -5 5 1 7 -6 -4 -6 4 1 -7 -5 -5 7 -1z" fill="#FFE15C" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M66 100 L92 106 M134 100 L108 106" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`
+};
+const MOUTH = {
+  smile:`<path d="M90 140 Q100 150 110 140" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+  frown:`<path d="M90 148 Q100 139 110 148" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+  pout:`<path d="M97 138 q8 3 0 6 q8 3 0 6" stroke="${INK}" stroke-width="4.5" fill="none" stroke-linecap="round"/>`,
+  open:`<ellipse cx="100" cy="145" rx="8" ry="9" fill="${INK}"/><ellipse cx="100" cy="149" rx="5" ry="3.5" fill="#FF7AA8"/>`,
+  wavy:`<path d="M86 145 q4 -6 8 0 t8 0 t8 0 t8 0" stroke="${INK}" stroke-width="4.5" fill="none" stroke-linecap="round"/>`,
+  cat:`<path d="M89 140 q5.5 7 11 0 q5.5 7 11 0" stroke="${INK}" stroke-width="4.5" fill="none" stroke-linecap="round"/>`,
+  smirk:`<path d="M88 145 Q104 150 113 136" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 147 l3 7 3 -6z" fill="#fff" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/>`,
+  flat:`<path d="M92 145 L108 145" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`,
+  grin:`<path d="M84 137 Q100 162 116 137 Z" fill="${INK}" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/><path d="M92 147 Q100 154 108 147 Q100 150 92 147Z" fill="#FF7AA8"/><path d="M86 138 L114 138" stroke="#fff" stroke-width="3"/>`,
+  o:`<circle cx="100" cy="145" r="5" fill="${INK}"/>`
+};
+const S = (d,fill="#fff",w=4.5)=>`<path d="${d}" fill="${fill}" stroke="${INK}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+
+// 各キャラの見た目
+const LOOK = {
+  ADFG:{c:"#FF7AA8",eye:"teary",mouth:"wavy",
+    back:S("M62 70 a14 14 0 1 1 20 -18z","#FFE15C")+S("M138 70 a14 14 0 1 0 -20 -18z","#FFE15C"),
+    front:S("M132 150 l14 -6 l6 14 l-14 6z","#FFF0C9",3.5)+`<path d="M139 151 l4 9" stroke="${INK}" stroke-width="2"/>`+S("M150 176 l-9 -9 a5.5 5.5 0 0 1 9 -6 a5.5 5.5 0 0 1 9 6z","#FF3D8B",3)},
+  ADFT:{c:"#C79BFF",eye:"angry",mouth:"pout",
+    back:[0,40,80,120,160,200,240,280,320].map(a=>{const r=a*Math.PI/180,x=100+Math.cos(r)*62,y=118+Math.sin(r)*62,x2=100+Math.cos(r)*82,y2=118+Math.sin(r)*82,px=Math.cos(r+1.57)*10,py=Math.sin(r+1.57)*10;return S(`M${x+px} ${y+py} L${x2} ${y2} L${x-px} ${y-py}z`,"#8E5BE0",4);}).join("")},
+  ADSG:{c:"#AEE0FF",eye:"happy",mouth:"smile",ghost:true,
+    front:S("M144 92 q6 10 0 14 q-6 -4 0 -14z","#8FD3FF",3)},
+  ADST:{c:"#FFB86B",eye:"side",mouth:"open",
+    back:S("M84 176 l-12 14","none",7)+S("M116 176 l16 10","none",7)+`<path d="M150 100 h22 M154 116 h26 M150 132 h20" stroke="${INK}" stroke-width="4.5" stroke-linecap="round"/>`,
+    front:S("M58 186 h18 q5 0 5 6 h-24z","#fff",4)+S("M128 192 h18 q5 0 5 6 h-24z","#fff",4)+S("M60 92 q6 10 0 14 q-6 -4 0 -14z","#8FD3FF",3)},
+  ANFG:{c:"#FF5C8A",eye:"heart",mouth:"open",
+    front:S("M136 132 h34 v42 h-34z","#FFF3D6",4)+`<path d="M142 144 h22 M142 153 h22 M142 162 h14" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>`+S("M132 128 h42 v8 h-42z","#E2B06A",4)+S("M132 170 h42 v8 h-42z","#E2B06A",4)},
+  ANFT:{c:"#9B8CFF",eye:"wide",mouth:"frown",
+    back:S("M80 62 L66 30","none",4.5)+S("M66 34 l-8 -8 a5 5 0 0 1 8 -5 a5 5 0 0 1 8 5z","#FF3D8B",3),
+    front:S("M138 128 h24 a4 4 0 0 1 4 4 v36 a4 4 0 0 1 -4 4 h-24 a4 4 0 0 1 -4 -4 v-36 a4 4 0 0 1 4 -4z","#fff",4)+`<rect x="140" y="135" width="20" height="26" rx="2" fill="#CFC3FF"/><circle cx="160" cy="132" r="6" fill="#FF3D8B" stroke="${INK}" stroke-width="2.5"/><text x="160" y="135.5" font-size="9" text-anchor="middle" fill="#fff" font-weight="900" font-family="sans-serif">99</text>`},
+  ANSG:{c:"#9ED8FF",eye:"tight",mouth:"flat",water:true,
+    front:S("M140 88 q7 11 0 16 q-7 -5 0 -16z","#8FD3FF",3)+S("M154 104 q5 8 0 11 q-5 -3 0 -11z","#8FD3FF",3)},
+  ANST:{c:"#FFC2D9",eye:"side",mouth:"pout",puff:true,
+    front:S("M140 48 h40 a10 10 0 0 1 10 10 v14 a10 10 0 0 1 -10 10 h-24 l-10 10 v-10 h-6 a10 10 0 0 1 -10 -10 v-14 a10 10 0 0 1 10 -10z","#fff",4)+`<circle cx="148" cy="65" r="3.5" fill="${INK}"/><circle cx="160" cy="65" r="3.5" fill="${INK}"/><circle cx="172" cy="65" r="3.5" fill="${INK}"/>`},
+  CDFG:{c:"#8EE3C8",eye:"glasses",mouth:"flat",
+    front:S("M138 124 h30 v46 h-30z","#fff",4)+S("M146 120 h14 v8 h-14z","#C9C1D6",3.5)+`<path d="M144 138 l4 4 l7 -8 M144 152 h18 M144 160 h14" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`},
+  CDFT:{c:"#8C86A8",eye:"smug",mouth:"smirk",
+    back:S("M46 100 L50 30 L94 64z","#8C86A8")+S("M154 100 L150 30 L106 64z","#8C86A8")+S("M56 84 L58 46 L82 64z","#FFC2D9",3)+S("M144 84 L142 46 L118 64z","#FFC2D9",3)},
+  CDSG:{c:"#F2D3A6",eye:"dot",mouth:"smile",
+    back:`<circle cx="56" cy="76" r="18" fill="#F2D3A6" stroke="${INK}" stroke-width="4.5"/><circle cx="144" cy="76" r="18" fill="#F2D3A6" stroke="${INK}" stroke-width="4.5"/><circle cx="56" cy="76" r="8" fill="#E7A97C"/><circle cx="144" cy="76" r="8" fill="#E7A97C"/>`,
+    front:`<g transform="rotate(-18 128 86)">`+S("M112 80 h32 a6 6 0 0 1 0 12 h-32 a6 6 0 0 1 0 -12z","#fff",3.5)+`<circle cx="124" cy="86" r="1.6" fill="${INK}"/><circle cx="132" cy="86" r="1.6" fill="${INK}"/></g>`},
+  CDST:{c:"#B8B5CF",eye:"dot",mouth:"flat",shutter:true},
+  CNFG:{c:"#FF7B5C",eye:"fire",mouth:"open",
+    back:S("M150 82 q20 -6 30 6 q-14 0 -26 6z","#FF3D8B",4)+S("M150 88 q18 6 24 20 q-12 -8 -26 -10z","#FF3D8B",4),
+    band:true,
+    front:`<g transform="translate(-18 18)">`+S("M30 122 l26 -10 v36 l-26 -10z","#FFE15C",4)+S("M56 112 h8 v36 h-8z","#fff",4)+`</g>`},
+  CNFT:{c:"#FFD45C",eye:"smug",mouth:"grin",
+    front:S("M70 64 L74 32 L88 50 L100 26 L112 50 L126 32 L130 64z","#FFE15C",4.5)+`<circle cx="100" cy="46" r="4.5" fill="#FF3D8B" stroke="${INK}" stroke-width="2.5"/>`},
+  CNSG:{c:"#FFE6F0",eye:"happy",mouth:"cat",
+    back:`<ellipse cx="100" cy="38" rx="34" ry="9" fill="none" stroke="#FFE15C" stroke-width="7"/><ellipse cx="100" cy="38" rx="34" ry="9" fill="none" stroke="${INK}" stroke-width="2"/>`,
+    front:S("M58 176 q-10 -16 6 -22 q10 8 6 22z","#FF9EC4",4)+S("M142 176 q10 -16 -6 -22 q-10 8 -6 22z","#FF9EC4",4)+S("M86 184 q14 -26 28 0z","#FFC2D9",4)},
+  CNST:{c:"#C2EBA4",eye:"sleepy",mouth:"o",
+    back:S("M118 52 q-4 -18 10 -24 q4 16 -10 24z","#7DE0C4",4)+S("M118 52 q12 -14 26 -8 q-10 14 -26 8z","#7DE0C4",4),
+    front:`<text x="162" y="80" font-family="sans-serif" font-weight="900" font-size="20" fill="${INK}">z</text><text x="176" y="60" font-family="sans-serif" font-weight="900" font-size="15" fill="${INK}">z</text>`}
+};
+
+function chara(code,opt={}){
+  const L=LOOK[code]; const sil=opt.sil;
+  const body = sil ? INK : L.c;
+  const id = "g"+code+(opt.uid||"");
+  let defs=`<defs>`;
+  if(L.ghost && !sil) defs+=`<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="${body}"/><stop offset="1" stop-color="${body}" stop-opacity=".15"/></linearGradient>`;
+  if(L.water && !sil) defs+=`<clipPath id="${id}c"><circle cx="100" cy="118" r="60"/></clipPath>`;
+  defs+=`</defs>`;
+  const fill = (L.ghost&&!sil)?`url(#${id})`:body;
+  let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">${defs}`;
+  if(L.back) s+= sil? L.back.replace(/fill="[^"]*"/g,`fill="${INK}"`) : L.back;
+  // 導火線
+  s+=`<path d="M100 52 q4 -20 24 -24" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  if(!sil) s+=`<path d="M124 14 l4 9 10 1 -8 7 3 10 -9 -5 -9 5 3 -10 -8 -7 10 -1z" fill="#FFE15C" stroke="${INK}" stroke-width="3" stroke-linejoin="round" transform="translate(-4 2)"/>`;
+  s+=`<rect x="87" y="48" width="26" height="16" rx="5" fill="${sil?INK:"#5B4766"}" stroke="${INK}" stroke-width="4.5"/>`;
+  // ボディ
+  s+= L.ghost&&!sil
+     ? `<path d="M40 118 a60 60 0 0 1 120 0 v54 l-15 -10 -15 12 -15 -12 -15 12 -15 -12 -15 12 -15 -12 -15 10z" fill="${fill}" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>`
+     : `<circle cx="100" cy="118" r="62" fill="${fill}" stroke="${INK}" stroke-width="5"/>`;
+  if(sil){ s+=`<text x="100" y="134" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="46" fill="#fff" fill-opacity=".9">?</text></svg>`; return s; }
+  if(L.water) s+=`<g clip-path="url(#${id}c)"><path d="M30 132 q12 -8 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 v60 h-144z" fill="#4AA8E8" fill-opacity=".55"/></g><circle cx="100" cy="118" r="62" fill="none" stroke="${INK}" stroke-width="5"/>`;
+  if(L.band) s+=`<path d="M44 96 Q100 76 156 96 L154 110 Q100 90 46 110z" fill="#fff" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/><circle cx="100" cy="92" r="6" fill="#FF3D8B" stroke="${INK}" stroke-width="2.5"/>`;
+  // ツヤ・ほっぺ
+  s+=`<ellipse cx="68" cy="90" rx="13" ry="8" fill="#fff" opacity=".7" transform="rotate(-35 68 90)"/>`;
+  s+=`<ellipse cx="66" cy="136" rx="${L.puff?13:10}" ry="${L.puff?9:6}" fill="#FF3D8B" opacity="${L.puff?.6:.4}"/><ellipse cx="134" cy="136" rx="10" ry="6" fill="#FF3D8B" opacity=".4"/>`;
+  if(L.puff) s+=`<path d="M48 128 q-6 8 2 16" stroke="${INK}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  s+=EYE[L.eye]()+MOUTH[L.mouth];
+  if(L.shutter) s+=`<g><path d="M42 78 Q100 60 158 78 L160 114 H40 Z" fill="#E4E2EE" stroke="${INK}" stroke-width="4.5" stroke-linejoin="round"/><path d="M44 88 H156 M42 98 H158 M41 107 H159" stroke="${INK}" stroke-width="2.5"/><rect x="92" y="108" width="16" height="8" rx="2" fill="#5B4766" stroke="${INK}" stroke-width="2.5"/></g>`;
+  if(L.front) s+=L.front;
+  return s+`</svg>`;
+}
+const GUIDE = ()=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M100 52 q4 -20 24 -24" stroke="${INK}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M120 16 l4 9 10 1 -8 7 3 10 -9 -5 -9 5 3 -10 -8 -7 10 -1z" fill="#FFE15C" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><rect x="87" y="48" width="26" height="16" rx="5" fill="#5B4766" stroke="${INK}" stroke-width="4.5"/><circle cx="100" cy="118" r="62" fill="#4A3352" stroke="${INK}" stroke-width="5"/><ellipse cx="68" cy="90" rx="13" ry="8" fill="#fff" opacity=".45" transform="rotate(-35 68 90)"/><ellipse cx="66" cy="136" rx="10" ry="6" fill="#FF3D8B" opacity=".7"/><ellipse cx="134" cy="136" rx="10" ry="6" fill="#FF3D8B" opacity=".7"/><circle cx="80" cy="118" r="8" fill="#fff"/><circle cx="120" cy="118" r="8" fill="#fff"/><circle cx="81" cy="119" r="4" fill="${INK}"/><circle cx="121" cy="119" r="4" fill="${INK}"/><path d="M90 140 Q100 150 110 140" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;
+const BIGBOMB = ()=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path class="fuse-burn" d="M124 28 q-20 4 -24 24" stroke="${INK}" stroke-width="6" fill="none" stroke-linecap="round"/><rect x="85" y="48" width="30" height="18" rx="5" fill="#5B4766" stroke="${INK}" stroke-width="5"/><circle cx="100" cy="120" r="64" fill="#4A3352" stroke="${INK}" stroke-width="5"/><ellipse cx="68" cy="90" rx="14" ry="9" fill="#fff" opacity=".45" transform="rotate(-35 68 90)"/><path d="M74 116 L88 122 L74 128 M126 116 L112 122 L126 128" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M90 146 q5 -6 10 0 q5 6 10 0" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;
+
+/* ================= 診断データ ================= */
+const AXES = [
+  {hi:"A",lo:"C",hiName:"不安",loName:"楽観",hiDesc:"相手の気持ちが気になって、確かめたくなりやすい",loDesc:"不安になりにくいぶん、相手の不安に気づきにくい"},
+  {hi:"D",lo:"N",hiName:"距離",loName:"密着",hiDesc:"近づかれると、逃げたくなりやすい",loDesc:"距離が近いぶん、相手が息苦しくなりやすい"},
+  {hi:"F",lo:"S",hiName:"攻撃",loName:"沈黙",hiDesc:"ケンカで責める、言い返すクセがある",loDesc:"ケンカで黙る、ため込むクセがある"},
+  {hi:"G",lo:"T",hiName:"尽くし",loName:"自分軸",hiDesc:"尽くしすぎて、見返りを求めやすい",loDesc:"自分のペースを優先しやすい"}
+];
+const Q = [
+  {t:"恋人からの返信が遅いと「嫌われたかも」と考えてしまう",a:0,d:1},
+  {t:"恋人に弱みや本音を見せるのは苦手だ",a:1,d:1},
+  {t:"不満があると「いつも〇〇だよね」と言ってしまう",a:2,d:1},
+  {t:"相手が喜ぶなら、自分の予定や気持ちは後回しにできる",a:3,d:1},
+  {t:"相手が本当に自分を好きか、確かめたくなることがある",a:0,d:1},
+  {t:"毎日連絡を取り合うのは、正直めんどくさい",a:1,d:1},
+  {t:"ケンカになりそうだと、黙るかその場から離れる",a:2,d:-1},
+  {t:"恋人には自分のペースに合わせてほしい",a:3,d:-1},
+  {t:"恋人が異性の友達と遊んでいても、特に気にならない",a:0,d:-1},
+  {t:"相手にもっと頼りたいし、頼られたいと思う",a:1,d:-1},
+  {t:"指摘されると、まず言い返したくなる",a:2,d:1},
+  {t:"「こんなにしてあげたのに」と思うことがある",a:3,d:1},
+  {t:"「別れよう」と言われる場面を想像して不安になる",a:0,d:1},
+  {t:"付き合いが深まるほど、なぜか一人になりたくなる",a:1,d:1},
+  {t:"嫌なことがあっても、言わずにため込むほうだ",a:2,d:-1},
+  {t:"付き合っても、自分の時間や趣味は絶対に削りたくない",a:3,d:-1},
+  {t:"恋人の気持ちを疑ったことは、ほとんどない",a:0,d:-1},
+  {t:"ケンカ中、相手を見下すような言い方や皮肉が出てしまう",a:2,d:1},
+  {t:"つらいことがあったら、まず恋人に相談する",a:1,d:-1},
+  {t:"恋人に頼まれると、無理をしてでも断れない",a:3,d:1}
+];
+const T = {
+ADFG:{k:"チクタン",n:"尽くして詰める時限爆弾",c:"愛情もトゲも全部重め。尽くした分だけ、あとで利子つきで請求しがち。",
+ m:["不安になると「試し行為」で愛を確かめようとする","尽くした回数を心の帳簿につけていて、ケンカで一気に出す","近づかれると冷たくなり、離れられると追いかける"],
+ h:"優しいのは知ってる。でも、いつ爆発するかわからなくて疲れる",f:"尽くす前に「これは見返りなしでできる？」と一度だけ自分に聞いてみて。帳簿をつけない優しさは、ちゃんと相手に届きます。"},
+ADFT:{k:"トゲミ",n:"トゲだらけの気分屋",c:"かまってほしいのに、触れると刺す。本人もどうしたいか分かっていない。",
+ m:["機嫌で態度が変わり、相手は毎日あなたの顔色をチェックしている","寂しさを怒りに変換して出してしまう","謝るのが苦手で、自分ルールは曲げない"],
+ h:"どのスイッチで怒るのか、取扱説明書がほしい",f:"イラッとしたら「怒ってる」ではなく「寂しい」に言い換えてみて。同じ気持ちでも、相手の反応がまるで変わります。"},
+ADSG:{k:"キエル",n:"ある日消える献身者",c:"いい人のまま我慢して、限界がきたら何も言わずに去っていく。",
+ m:["嫌なことを言えず、笑顔で受け流してしまう","尽くすことで嫌われないようにしている","我慢がたまると、説明なしでフェードアウトする"],
+ h:"何が嫌だったのか、言ってくれれば直したのに",f:"不満は小さいうちに。「ちょっとだけ嫌だった」と言う練習から始めましょう。小さく言えば、関係は壊れません。"},
+ADST:{k:"ニゲル",n:"音信不通の逃亡者",c:"好きになるほど怖くなって連絡を絶つ。追われると逃げ、離れると不安になる。",
+ m:["関係が深まりそうになると、急に連絡が減る","話し合いの場から、物理的にも心理的にも消える","自分の不安から身を守るのを最優先して、相手を置き去りにする"],
+ h:"嫌われたのか、忙しいのか、生きてるのかすらわからない",f:"消えたくなったら「今ちょっと一人になりたい。〇日に連絡する」と期限つきで伝えて。それだけで相手の不安は半分になります。"},
+ANFG:{k:"ツケコ",n:"重すぎる愛の取り立て屋",c:"愛が深い。深すぎて、相手が溺れている。",
+ m:["「こんなにしてるのに」が口ぐせになっている","相手の愛情が自分と同じ量じゃないと不安になって責める","尽くすことで相手を縛っている自覚がない"],
+ h:"ありがたいけど、同じ熱量を返せなくて申し訳なくなる",f:"愛情の「量」より「相手が受け取りやすい形」を聞いてみて。少なめのほうが、ちゃんと届くこともあります。"},
+ANFT:{k:"ミハリン",n:"24時間監視のかまってモンスター",c:"返信、居場所、交友関係。全部把握していないと落ち着かない。",
+ m:["返信が遅いと追いLINEや鬼電をしてしまう","異性の影にすぐ反応して問い詰める","自分の不安を消すことが、相手の自由より優先される"],
+ h:"好きだけど、息ができない",f:"不安になったら、連絡する前に10分だけ別のことをしてみて。不安の波はたいてい自然に引いていきます。"},
+ANSG:{k:"ダムダム",n:"我慢の限界ダム",c:"静かに尽くし、静かにため込み、ある日すべてが決壊する。",
+ m:["嫌われるのが怖くて「大丈夫」と言ってしまう","小さな不満を言わずに貯金し続ける","決壊したとき、過去の話を全部持ち出してしまう"],
+ h:"急にキレられても、何年前の話かわからない",f:"週に一回「最近ちょっと気になったこと」を話す時間を決めましょう。ダムに放水口をつけるイメージです。"},
+ANST:{k:"ムスッピ",n:"察して待ちの無言アピーラー",c:"言わない。でも気づいてほしい。気づかれないと不機嫌になる。",
+ m:["不満を言葉にせず、ため息や既読無視で伝えようとする","「なんでもない」の裏に大量の「なんでもある」がある","察してもらえないと「愛がない」と結論づける"],
+ h:"エスパーじゃないので、言葉でお願いします",f:"「察して」を「〇〇してほしい」という一文に翻訳してから伝えて。言われたほうは、むしろ嬉しいものです。"},
+CDFG:{k:"セイロン",n:"正論で殴るお世話係",c:"面倒見はいい。でも愛情表現が、ほぼ説教になっている。",
+ m:["相談されると、共感より先に正論とダメ出しが出る","世話を焼くぶん、相手を下に見てしまう","気持ちの話を「非効率」と切り捨てがち"],
+ h:"正しいのはわかる。でも今は、ただ聞いてほしかった",f:"アドバイスする前に「解決策がほしい？それとも聞いてほしい？」と確認するだけで、地雷の半分は撤去できます。"},
+CDFT:{k:"ロンパ",n:"論破好きの一匹狼",c:"恋愛より自分が大事。ケンカは勝つまでやる。",
+ m:["議論で相手を言い負かして、関係では負けている","相手の気持ちを「重い」「めんどい」と軽く扱う","皮肉や見下した態度が出る（研究上もっとも危険なサイン）"],
+ h:"話し合いじゃなくて、裁判されてる気分",f:"ケンカのゴールを「勝つ」から「次も一緒にいる」に置き換えて。言い負かした回数だけ、心の距離が開きます。"},
+CDSG:{k:"ベンリー",n:"気づけば都合のいい人",c:"優しくて頼れる。なのに、本音は誰も知らない。",
+ m:["相手に合わせすぎて、意見がない人に見える","本音を見せないので、相手は距離を感じている","雑に扱われても「まあいいか」で流してしまう"],
+ h:"優しいけど、本当は何を考えてるのかわからない",f:"週に一回、自分の「本当はこうしたい」を一つだけ口に出してみて。わがままではなく、信頼の材料になります。"},
+CDST:{k:"シャッタ",n:"心のシャッター職人",c:"自分の世界が完成していて、恋人はその外側にいる。",
+ m:["話し合いになると、黙ってシャッターを下ろす","恋人より趣味や一人の時間を優先しがち","相手が不安を訴えても「考えすぎ」で片づける"],
+ h:"付き合ってるのに、ずっと片思いしてる気分",f:"黙りたくなったら「20分休憩したら話す」と伝えてから離れて。黙ること自体より、黙って消えることが地雷です。"},
+CNFG:{k:"アツオ",n:"おせっかい熱血コーチ",c:"相手のためを思って、相手を改造しようとしている。",
+ m:["「もっとこうしたほうがいい」が止まらない","自分の正解を相手にも押しつけがち","善意なので、自分が地雷だと気づいていない"],
+ h:"恋人がほしかったのに、コーチがついた",f:"直してほしい点を一つ言うなら、その前にいいところを三つ伝えて。人は、認められた相手の言葉しか聞けません。"},
+CNFT:{k:"オレサマ",n:"悪気ゼロの無自覚キング",c:"自信があって明るい。ただ、相手の気持ちのスピードに気づいていない。",
+ m:["思ったことをそのまま言って、相手を傷つけている","予定も決定も、気づけば全部自分のペース","相手が我慢していることに気づかない"],
+ h:"楽しいけど、こっちの意見を聞かれたことがない",f:"何か決める前に「どうしたい？」を一回挟むだけ。それだけで、印象はまるで変わります。"},
+CNSG:{k:"ボサツ",n:"なんでも許す菩薩",c:"怒らない、責めない、尽くす。その優しさが、相手を甘やかしている。",
+ m:["嫌なことをされても許してしまい、相手が調子に乗る","「怒らない＝不満がない」と誤解されている","自分を大事にしないので、相手にも大事にされにくい"],
+ h:"何しても怒らないから、つい甘えちゃう",f:"「それは嫌だ」と言うのは、関係を壊すことではなく守ること。境界線を引ける人のほうが、大切にされます。"},
+CNST:{k:"ポヤン",n:"マイペース天然ボケ",c:"一緒にいて楽。ただ、相手の不安に気づくのがワンテンポ遅い。",
+ m:["悪気なく連絡を忘れて、相手を不安にさせる","相手のサインに気づかず、ケンカになってから驚く","面倒な話し合いは、ふわっとかわす"],
+ h:"怒る気も失せるけど、たまに寂しい",f:"一日一回、聞かれる前に自分から連絡してみて。あなたの「普通」が、相手には特別な安心になります。"}
+};
+const CODES = Object.keys(T);
+
+/* ================= 相性ロジック ================= */
+function compat(a,b){
+  let s=72; const why=[];
+  const A1=a[0]==="A",A2=b[0]==="A",D1=a[1]==="D",D2=b[1]==="D";
+  if((A1&&D2&&b[0]==="C")||(A2&&D1&&a[0]==="C")){s-=22;why.push("片方が近づくほど片方が離れる「追う・逃げる」の悪循環に入りやすい組み合わせです。");}
+  else if((A1&&D2)||(A2&&D1)){s-=14;why.push("不安と距離感のズレで、連絡頻度のケンカが起きやすいです。");}
+  if(A1&&A2){s-=10;why.push("ふたりとも不安になりやすく、不安が連鎖しやすいです。");}
+  if(D1&&D2){s-=8;why.push("ふたりとも距離をとるので、気づけば他人のようになる危険があります。");}
+  if(a[0]==="C"&&b[0]==="C"){s+=8;why.push("どちらも安定しているので、多少の衝突では揺らぎません。");}
+  else if(a[0]==="C"||b[0]==="C"){s+=4;}
+  if(a[2]!==b[2]){s-=14;why.push("ケンカで片方が責め、片方が黙る「要求・回避パターン」になりやすく、研究でも関係悪化と結びつく型です。");}
+  else if(a[2]==="F"){s-=9;why.push("ふたりとも言い返すので、ケンカが毎回ヒートアップしがちです。");}
+  else {s-=4;why.push("ふたりとも黙るので、問題が放置されやすいです。");}
+  if(a[3]!==b[3]){s-=4;why.push("尽くす側と受け取る側に分かれやすく、最初は楽でも不満が片方にたまります。");}
+  else if(a[3]==="G"){s+=8;why.push("お互いに相手を思いやれるので、支え合える関係です。");}
+  else {s-=6;why.push("ふたりとも自分のペースを優先するので、譲り合いを意識しないとすれ違います。");}
+  return {s:Math.max(8,Math.min(97,s)),why};
+}
+function bestWorst(code){
+  let best=null,worst=null;
+  CODES.forEach(c=>{ if(c===code) return; const s=compat(code,c).s;
+    if(!best||s>best.s) best={c,s}; if(!worst||s<worst.s) worst={c,s}; });
+  return {best,worst};
+}
+
+/* ================= 図鑑（この端末のみ） ================= */
+function getZ(){try{return JSON.parse(localStorage.getItem("jirai_zukan")||"[]")}catch(e){return []}}
+function addZ(c){try{const z=getZ(); if(!z.includes(c)){z.push(c);localStorage.setItem("jirai_zukan",JSON.stringify(z));}}catch(e){}}
+function getMe(){try{return localStorage.getItem("jirai_me")}catch(e){return null}}
+function setMe(c){try{localStorage.setItem("jirai_me",c)}catch(e){}}
+
+/* ================= 画面 ================= */
+const $=id=>document.getElementById(id);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function show(id){["top","quiz","loading","result"].forEach(s=>$(s).classList.toggle("hidden",s!==id));window.scrollTo(0,0);}
+function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");setTimeout(()=>el.classList.remove("on"),1800);}
+
+let ans=new Array(Q.length).fill(null), idx=0, fromCode=null, lastCode=null;
+
+function renderTop(){
+  $("hero").innerHTML=`<div class="c c2">${chara("ANST",{uid:"h2"})}</div><div class="c c1">${chara("ADFG",{uid:"h1"})}</div><div class="c c3">${chara("CDFT",{uid:"h3"})}</div>`;
+  const z=getZ(), me=getMe();
+  $("zCount").textContent=`${z.length}/16`;
+  $("zgrid").innerHTML=CODES.map(c=>{const on=z.includes(c);
+    return `<button class="zcell ${on?"on":""} ${me===c?"me":""}" data-c="${c}" aria-label="${on?T[c].k:"未発見のキャラ"}">${chara(c,{sil:!on,uid:"z"})}</button>`}).join("");
+  document.querySelectorAll(".zcell").forEach(b=>b.onclick=()=>openSheet(b.dataset.c,z.includes(b.dataset.c)));
+}
+function openSheet(c,on){
+  const t=T[c];
+  $("sheetRoot").innerHTML=`<div class="sheet-bg" id="sbg"><div class="sheet" role="dialog" aria-modal="true">
+    <div class="sc">${chara(c,{sil:!on,uid:"s"})}</div>
+    ${on?`<h4>${t.k}</h4><small>${t.n}（${c}）</small><p>${t.c}</p>`:`<h4>？？？</h4><small>まだ見つかっていません</small><p>自分が診断するか、このキャラの友達から相性リンクが届くと登録されます。</p>`}
+    <button class="btn sm sub" id="sClose">閉じる</button></div></div>`;
+  $("sbg").onclick=e=>{if(e.target.id==="sbg"||e.target.id==="sClose") $("sheetRoot").innerHTML="";};
+}
+
+(function(){
+  const m=(location.hash||"").match(/^#from-([acdnfsgt]{4})$/i);
+  if(m){const c=m[1].toUpperCase(); if(T[c]){fromCode=c; addZ(c);
+    $("invite").innerHTML=`<div class="ic">${chara(c,{uid:"inv"})}</div><p><b>${T[c].k}</b>（${T[c].n}）の友達から、相性診断が届いています。診断すると、ふたりの相性がわかります。</p>`;
+    $("invite").classList.remove("hidden");}}
+  renderTop();
+  $("gchar").innerHTML=GUIDE();
+  $("segs").innerHTML=Q.map(()=>"<i></i>").join("");
+  $("icoMine").innerHTML=GUIDE();
+})();
+
+function renderQ(){
+  const q=Q[idx];
+  $("qno").textContent=`Q${idx+1}`;
+  $("qtext").textContent=q.t;
+  [...$("segs").children].forEach((s,i)=>{s.className=i<idx?"done":i===idx?"now":""});
+  document.querySelectorAll(".ch").forEach(d=>d.classList.toggle("sel",+d.dataset.v===ans[idx]));
+  $("backBtn").style.visibility=idx===0?"hidden":"visible";
+  const g=$("gchar"); g.classList.remove("hop"); void g.offsetWidth; g.classList.add("hop");
+}
+$("startBtn").onclick=()=>{ans.fill(null);idx=0;show("quiz");renderQ();};
+$("retryBtn").onclick=()=>{renderTop();show("top");};
+$("zBtn").onclick=()=>{renderTop();show("top");setTimeout(()=>document.querySelector(".zukan").scrollIntoView({behavior:reduce?"auto":"smooth"}),50);};
+$("backBtn").onclick=()=>{if(idx>0){idx--;renderQ();}};
+let locking=false;
+document.querySelectorAll(".ch").forEach(d=>d.onclick=()=>{
+  if(locking) return; locking=true;
+  ans[idx]=+d.dataset.v;
+  document.querySelectorAll(".ch").forEach(x=>x.classList.toggle("sel",x===d));
+  setTimeout(()=>{locking=false; if(idx<Q.length-1){idx++;renderQ();} else finish();},200);
+});
+
+function calc(){
+  const sums=[0,0,0,0], cnt=[0,0,0,0], tb=[0,0,0,0], anchor=[null,null,null,null];
+  Q.forEach((q,i)=>{const v=ans[i]; const k=q.d>0? v : 6-v; const dev=k-3;
+    sums[q.a]+=k; cnt[q.a]++;
+    tb[q.a]+=dev*Math.abs(dev);            // 強く答えた質問ほど重くする
+    if(anchor[q.a]===null && dev!==0) anchor[q.a]=dev; // それでも決まらないときは、先に答えた質問を優先
+  });
+  const p=sums.map((s,i)=>(s-cnt[i])/(cnt[i]*4));
+  const code=p.map((x,i)=>{
+    if(Math.abs(x-0.5)>1e-9) return x>0.5?AXES[i].hi:AXES[i].lo;
+    if(tb[i]!==0) return tb[i]>0?AXES[i].hi:AXES[i].lo;
+    if(anchor[i]!==null) return anchor[i]>0?AXES[i].hi:AXES[i].lo;
+    return AXES[i].hi;
+  }).join("");
+  const meanExt=p.map(x=>Math.abs(x-0.5)*2).reduce((a,b)=>a+b,0)/4;
+  const score=Math.round(Math.min(99,Math.max(12, 22 + 58*meanExt + 12*p[0] + 12*p[1])));
+  return {code,p,score};
+}
+
+function finish(){
+  show("loading");
+  $("bombbig").innerHTML=BIGBOMB();
+  const msgs=["地雷を探知しています","愛着スタイルを分析しています","ケンカのクセを分析しています","地雷が見つかりました"];
+  let i=0; $("loadText").textContent=msgs[0];
+  const t=setInterval(()=>{i++; if(i<msgs.length) $("loadText").textContent=msgs[i];},560);
+  setTimeout(()=>$("bombbig").classList.add("shake"),1500);
+  setTimeout(()=>{clearInterval(t); $("bombbig").classList.remove("shake");
+    const f=$("flash"); f.classList.remove("go"); void f.offsetWidth; f.classList.add("go");
+    renderResult(calc());},reduce?600:2300);
+}
+
+function rankText(s){
+  if(s>=85) return "地雷原レベル。歩くたびに爆発音がします";
+  if(s>=70) return "高濃度の地雷。恋人はつま先立ちで歩いています";
+  if(s>=55) return "そこそこの地雷。踏むとちゃんと痛いです";
+  if(s>=40) return "小さめの地雷。気づかれずに埋まっています";
+  return "ほぼ安全地帯。でもゼロではありません";
+}
+
+function renderResult({code,p,score}){
+  lastCode=code; addZ(code); setMe(code);
+  const t=T[code], L=LOOK[code];
+  $("cardIn").style.setProperty("--cbg1",L.c);
+  $("rCode").textContent=code;
+  $("rNo").textContent=`図鑑 No.${String(CODES.indexOf(code)+1).padStart(2,"0")}`;
+  $("rChar").innerHTML=chara(code,{uid:"r"});
+  $("rType").textContent=t.n;
+  $("rName").textContent=t.k;
+  $("rCatch").textContent=t.c;
+  $("rRank").textContent=rankText(score);
+  $("rMines").innerHTML=t.m.map((x,i)=>`<li><b>${i+1}</b><span>${x}</span></li>`).join("");
+  $("rHonne").textContent=t.h;
+  $("rFix").textContent=t.f;
+  $("rAxes").innerHTML=AXES.map((a,i)=>{
+    const hi=code[i]===a.hi, pct=Math.round((hi?p[i]:1-p[i])*100);
+    return `<div class="axis"><div class="lr"><span class="${!hi?"on":"off"}">${a.loName}</span><span class="${hi?"on":"off"}">${a.hiName}</span></div>
+      <div class="tr"><i data-l="${p[i]*100}"></i></div><p><b>${hi?a.hiName:a.loName} ${pct}%</b>　${hi?a.hiDesc:a.loDesc}</p></div>`;}).join("");
+  const bw=bestWorst(code);
+  $("bestC").innerHTML=chara(bw.best.c,{uid:"b"}); $("bestN").textContent=`${T[bw.best.c].k}（${T[bw.best.c].n}）`;
+  $("worstC").innerHTML=chara(bw.worst.c,{uid:"w"}); $("worstN").textContent=`${T[bw.worst.c].k}（${T[bw.worst.c].n}）`;
+  if(fromCode){
+    const r=compat(code,fromCode);
+    $("compatBox").innerHTML=`<h4>友達の${T[fromCode].k}との相性</h4>
+      <div class="duo"><div>${chara(code,{uid:"d1"})}</div><div class="heart">${r.s}%</div><div>${chara(fromCode,{uid:"d2"})}</div></div>
+      ${r.why.slice(0,3).map(w=>`<p>${w}</p>`).join("")}`;
+    $("compatBox").classList.remove("hidden");
+  } else $("compatBox").classList.add("hidden");
+  $("theory").innerHTML=THEORY;
+
+  show("result");
+  const card=$("card"); card.classList.remove("reveal"); void card.offsetWidth; card.classList.add("reveal");
+  let n=0; const el=$("rScore");
+  const step=()=>{n+=Math.max(1,Math.round((score-n)/8)); if(n>score)n=score; el.innerHTML=`${n}<small>%</small>`; if(n<score) requestAnimationFrame(step);};
+  setTimeout(()=>{ if(reduce){el.innerHTML=`${score}<small>%</small>`;} else requestAnimationFrame(step);
+    $("rBar").style.width=score+"%";
+    document.querySelectorAll(".axis .tr i").forEach(i=>i.style.left=i.dataset.l+"%");},reduce?0:650);
+  setupShare(code,score);
+  drawCard(code,score);
+}
+
+// ホロの光（指やマウスの位置で動く）
+(function(){
+  const card=$("card");
+  const mv=e=>{const r=card.getBoundingClientRect(); const x=((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width;
+    $("holo").style.setProperty("--hx",(x*100)+"%");};
+  card.addEventListener("pointermove",mv); card.addEventListener("touchmove",mv,{passive:true});
+})();
+
+const THEORY = `
+この診断は、恋愛関係の研究でよく使われている4つの考え方をもとに、20問（1つの軸につき5問）で4つの軸を測っています。<br><br>
+<b>不安と楽観（愛着不安）</b><br>大人の恋愛にも子どものころの「愛着」のパターンが表れるという成人愛着理論（Hazan & Shaver, 1987）にもとづく軸です。見捨てられることへの不安の強さを測ります。研究ではBrennanら（1998）の尺度で測られることが多い概念です。<br><br>
+<b>距離と密着（愛着回避）</b><br>同じく愛着理論の、親密になることへの抵抗の強さです。この2軸の組み合わせで、安定型、とらわれ型、回避型、恐れ回避型という代表的な愛着スタイルに分かれます。<br><br>
+<b>攻撃と沈黙（ケンカのスタイル）</b><br>カップルを長年観察したゴットマンの研究では、「批判」「侮辱」「自己弁護」「逃避（黙り込み）」の4つが別れを予測するサインとされています。また、片方が責めて片方が黙る要求・回避パターン（Christensenら）は、関係の不満と強く結びつくことが知られています。<br><br>
+<b>尽くしと自分軸（非緩和的共同性）</b><br>自分を後回しにしてまで相手に尽くす傾向は、心理学で非緩和的共同性（Helgeson & Fritz）と呼ばれ、見返りへの不満やストレスと関連するとされます。反対側の極端な自分優先も、すれ違いの原因になります。<br><br>
+<b>地雷度</b>は、4つの軸の偏りの強さに、関係の満足度と特に関連が強いとされる愛着不安と愛着回避の高さを重めに加えて計算しています。<br><br>
+<b>相性</b>は、不安型と回避型の「追う・逃げる」の悪循環や、要求・回避パターンなど、研究で関係悪化と結びつくとされる組み合わせから計算しています。<br><br>
+この診断は研究の考え方をもとにしたエンタメ診断です。学術的に検証された心理検査ではなく、医学的、心理的な診断を行うものでもありません。`;
+
+/* ================= シェア ================= */
+function setupShare(code,score){
+  const t=T[code];
+  const text=`私の恋愛地雷キャラは「${t.k}」\n${t.n}タイプ、地雷度${score}%でした\n\n#恋愛地雷度診断`;
+  const fromUrl=`${SHARE_URL}#from-${code.toLowerCase()}`;
+  $("xBtn").href=`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(fromUrl)}`;
+  $("lineBtn").href=`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(fromUrl)}`;
+  $("copyBtn").onclick=async()=>{
+    const msg=`私は「${t.k}」（${t.n}）だった。あなたとの相性を診断してみて\n${fromUrl}`;
+    try{await navigator.clipboard.writeText(msg);toast("リンクをコピーしました");}
+    catch(e){toast("コピーできませんでした。もう一度押してください");}
+  };
+}
+
+/* ================= ストーリー画像（1080×1920） ================= */
+function wrapText(ctx,text,maxW){const lines=[];let cur="";for(const ch of text){if(ctx.measureText(cur+ch).width>maxW){lines.push(cur);cur=ch;}else cur+=ch;}if(cur)lines.push(cur);return lines;}
+function rr(x,X,Y,W,H,R){x.beginPath();x.moveTo(X+R,Y);x.arcTo(X+W,Y,X+W,Y+H,R);x.arcTo(X+W,Y+H,X,Y+H,R);x.arcTo(X,Y+H,X,Y,R);x.arcTo(X,Y,X+W,Y,R);x.closePath();}
+function svgImg(svg){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);});}
+async function drawCard(code,score){
+  try{await Promise.all([document.fonts.load('80px "Mochiy Pop One"'),document.fonts.load('900 40px "Zen Maru Gothic"')]);}catch(e){}
+  const t=T[code],L=LOOK[code],W=1080,H=1920;
+  const c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+  x.fillStyle="#FBE1EC";x.fillRect(0,0,W,H);
+  x.fillStyle="rgba(255,61,139,.13)";for(let yy=24;yy<H;yy+=48)for(let xx=24;xx<W;xx+=48){x.beginPath();x.arc(xx,yy,4.5,0,7);x.fill();}
+  // タイトル
+  x.textAlign="center";x.lineJoin="round";
+  x.font='88px "Mochiy Pop One", sans-serif';x.lineWidth=18;x.strokeStyle=INK;
+  x.strokeText("恋愛地雷度診断",W/2,190);x.fillStyle="#FF3D8B";x.fillText("恋愛地雷度診断",W/2,190);
+  // カード
+  const cx=80,cy=260,cw=W-160,ch=1380;
+  x.fillStyle=INK;rr(x,cx,cy,cw,ch,60);x.fill();
+  const g=x.createLinearGradient(0,cy,0,cy+ch);g.addColorStop(0,L.c);g.addColorStop(.62,"#FFF6FA");
+  x.fillStyle=g;rr(x,cx+22,cy+22,cw-44,ch-44,42);x.fill();
+  // コード
+  x.fillStyle=INK;rr(x,cx+60,cy+60,250,70,16);x.fill();
+  x.fillStyle="#fff";x.font='42px "Mochiy Pop One", sans-serif';x.fillText(code.split("").join(" "),cx+185,cy+110);
+  x.fillStyle="#8A6E86";x.font='900 34px "Zen Maru Gothic", sans-serif';x.textAlign="right";
+  x.fillText(`図鑑 No.${String(CODES.indexOf(code)+1).padStart(2,"0")}`,cx+cw-60,cy+108);x.textAlign="center";
+  // 窓
+  const wx=cx+60,wy=cy+160,ww=cw-120,wh=560;
+  x.save();rr(x,wx,wy,ww,wh,36);x.clip();
+  x.fillStyle="rgba(255,255,255,.35)";for(let a=0;a<36;a+=2){x.beginPath();x.moveTo(W/2,wy+wh*.55);x.arc(W/2,wy+wh*.55,900,a*Math.PI/18,(a+1)*Math.PI/18);x.closePath();x.fill();}
+  x.fillStyle="rgba(255,255,255,.95)";x.beginPath();x.arc(W/2,wy+wh*.55,200,0,7);x.fill();x.restore();
+  x.lineWidth=8;x.strokeStyle=INK;rr(x,wx,wy,ww,wh,36);x.stroke();
+  try{const img=await svgImg(chara(code,{uid:"cv"}));x.drawImage(img,W/2-260,wy+20,520,520);}catch(e){}
+  // 名前
+  let y=wy+wh+80;
+  x.fillStyle="#8A6E86";x.font='900 38px "Zen Maru Gothic", sans-serif';x.fillText(t.n,W/2,y);
+  y+=110;x.fillStyle=INK;x.font='104px "Mochiy Pop One", sans-serif';x.fillText(t.k,W/2,y);
+  y+=80;x.font='900 36px "Zen Maru Gothic", sans-serif';
+  wrapText(x,t.c,cw-180).slice(0,3).forEach((l,i)=>x.fillText(l,W/2,y+i*56));
+  // メーター
+  y=cy+ch-200;
+  x.fillStyle="#fff";rr(x,cx+60,y,cw-120,130,30);x.fill();x.lineWidth=7;x.strokeStyle=INK;x.stroke();
+  x.textAlign="left";x.fillStyle=INK;x.font='900 32px "Zen Maru Gothic", sans-serif';x.fillText("恋愛",cx+92,y+58);x.fillText("地雷度",cx+92,y+98);
+  const bx=cx+220,bw=cw-560,by=y+50;
+  x.fillStyle="#FBE1EC";rr(x,bx,by,bw,32,16);x.fill();x.lineWidth=5;x.stroke();
+  x.save();rr(x,bx,by,bw,32,16);x.clip();x.fillStyle="#FF3D8B";x.fillRect(bx,by,bw*score/100,32);x.restore();
+  x.textAlign="right";x.fillStyle=INK;x.font='84px "Mochiy Pop One", sans-serif';x.fillText(score+"%",cx+cw-80,y+96);
+  x.textAlign="center";
+  // フッター
+  x.font='900 40px "Zen Maru Gothic", sans-serif';x.fillStyle=INK;x.fillText("あなたの地雷キャラも診断してみて",W/2,H-170);
+  x.fillStyle="#FF3D8B";x.font='900 38px "Zen Maru Gothic", sans-serif';x.fillText("#恋愛地雷度診断",W/2,H-106);
+  $("cardImg").src=c.toDataURL("image/png");
+  c.toBlob(b=>{window.__cardBlob=b;},"image/png");
+}
+
+(async()=>{
+  try{
+    if(!window.claude||!window.claude.use){
+      $("dlBtn").classList.remove("hidden");
+      $("dlBtn").onclick=()=>{ if(!window.__cardBlob) return;
+        const a=document.createElement("a"); a.href=URL.createObjectURL(window.__cardBlob);
+        a.download=`jirai_${lastCode}.png`; document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(()=>URL.revokeObjectURL(a.href),4000); };
+      return;
+    }
+    const dl=await window.claude.use("downloads"); if(!dl) return;
+    $("dlBtn").classList.remove("hidden");
+    $("dlBtn").onclick=async()=>{ if(!window.__cardBlob) return;
+      try{await dl.save({filename:`jirai_${lastCode}.png`,data:window.__cardBlob});}catch(e){} };
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
